@@ -1,0 +1,51 @@
+<br>
+<h2 style="text-align: center">Dynamic Table With Select Options</h2><br>
+<table class="table table-bordered" style="z-index:1;" [contextMenu]="basicMenu" [contextMenuSubject]="item">
+  <tbody>
+    <tr *ngFor="let row of rows; let i = index">
+      <td>
+        <input type="text" [matAutocomplete]="auto" [(ngModel)]="rows[i].country" [id]="i" [contextMenu]="basicMenu"
+          [contextMenuSubject]="item" class="form-control" placeholder="" #country
+          (ngModelChange)="filterCountryData(country.value, i)" (keyup.enter)="onKeyCountry(country.value, i)">
+
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let data of filterdOptions " [value]="data.country">
+            <span>{{data.country}}</span>
+          </mat-option>
+        </mat-autocomplete>
+      </td>
+      <td>
+        <input type="text" class="form-control" [id]="i" [(ngModel)]="rows[i].capital" [contextMenu]="basicMenu"
+          [contextMenuSubject]="item" [matAutocomplete]="auto1" placeholder="" #capital
+          (keyup.enter)="onKeyCapital(capital.value, i)" (ngModelChange)="filterCapitalData(capital.value, i)">
+
+        <mat-autocomplete #auto1="matAutocomplete">
+          <mat-option *ngFor="let data of filterdOptions " [value]="data.capital">
+            <span>{{data.capital}}</span>
+          </mat-option>
+        </mat-autocomplete>
+      </td>
+      <td *ngFor="let column of columns; let i = index">
+        <input type="text" class="form-control" placeholder="">
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<context-menu>
+  <ng-template contextMenuItem (execute)="addRow()">
+    Add Row
+  </ng-template>
+  <ng-template contextMenuItem divider="true"></ng-template>
+  <ng-template contextMenuItem (execute)="removeRow()">
+    Remove Row
+  </ng-template>
+  <ng-template contextMenuItem divider="true"></ng-template>
+  <ng-template contextMenuItem (execute)="addColumn()">
+    Add Column
+  </ng-template>
+  <ng-template contextMenuItem divider="true"></ng-template>
+  <ng-template contextMenuItem (execute)="removeColumn()">
+    Remove Column
+  </ng-template>
+</context-menu>

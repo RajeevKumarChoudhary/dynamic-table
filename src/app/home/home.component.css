@@ -1,0 +1,13 @@
+table {
+  margin-left:10%;
+    width: 80%;
+}
+  
+button {
+    margin: 16px 8px;
+}
+
+.contextMenu {
+    position: relative;
+    z-index:99;
+}
